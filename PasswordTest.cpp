@@ -14,6 +14,20 @@ class PasswordTest : public ::testing::Test
 		virtual void TearDown(){} //clean up after each test, (before destructor)
 };
 
+TEST(PasswordTest, space_password)
+{
+	Password my_password;
+	int actual = my_password.count_leading_characters(" ");
+	ASSERT_EQ(0, actual);
+}
+
+TEST(PasswordTest, empty_password)
+{
+	Password my_password;
+	int actual = my_password.count_leading_characters("");
+	ASSERT_EQ(0, actual);
+}
+
 TEST(PasswordTest, single_letter_password)
 {
 	Password my_password;
@@ -74,6 +88,20 @@ TEST(PasswordTest, long_multi_char_password)
 	Password my_password;
 	int actual = my_password.count_leading_characters("zzzABCDEFG");
 	ASSERT_EQ(3, actual);
+}
+
+TEST(PasswordTest, empty_password_mixed_case)
+{
+	Password my_password;
+	bool actual = my_password.has_mixed_case("");
+	ASSERT_EQ(false, actual);
+}
+
+TEST(PasswordTest, space_password_mixed_case)
+{
+	Password my_password;
+	bool actual = my_password.has_mixed_case(" ");
+	ASSERT_EQ(false, actual);
 }
 
 TEST(PasswordTest, same_case_single_letter_password)
